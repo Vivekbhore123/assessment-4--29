@@ -1,0 +1,286 @@
+<br>
+
+<div class="container p-5">
+  <div class="row">
+    <mat-card >
+      <form [formGroup]="personForm" (ngSubmit)="submit()">
+        <!-- <div class="colr container"> this will mark space above (margin) -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 imp form-group">
+              
+              <h1 style="font-weight:bolder;">Create new Employee</h1>
+            </div>
+            <div class="col-md-6 imp form-group">
+      
+            </div>
+            <div class="col-md-2 imp form-group">
+              <button class="btn btn-sm" mat-raised-button color="accent"  routerLink="/emplist">Return</button>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-md-4 form-group">
+
+ 
+              <mat-form-field class="example-full-width imp" appearance="fill">
+                <mat-label>Name</mat-label>
+                <input required id="fname" type="text" name="fname" formControlName="fname"
+                  matInput>
+                <mat-error>
+                  firstName is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+            <div class="col-md-4 form-group">
+
+              <mat-form-field class="example-full-width imp" appearance="fill">
+                <mat-label>Middle Name</mat-label>
+                <input id="mname" value="dataTofill.mname" type="text" name="mname"
+                formControlName="mname" matInput>
+                <mat-error>
+                  middleName is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 form-group">
+
+
+              <mat-form-field class="example-full-width imp" appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input required id="lname" type="text" value="dataTofill.lname" name="lname" 
+                formControlName="lname" matInput>
+                <mat-error >
+                  lastName is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- kbnkdnkn -->
+          
+          <div class="row">
+
+            <div class="col-md-4 form-group">
+
+ 
+              <mat-form-field class="example-form-field imp" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input required matInput type="text" formControlName="email">
+                <mat-error *ngIf="personForm.get('email')!.errors!==null && personForm.get('email')!.errors!['emailmismatch']">
+                  Email is invalid.
+                  </mat-error>
+              </mat-form-field>
+
+            </div>
+            <div class="col-md-4 form-group">
+
+              <mat-form-field class="example-full-width imp" appearance="fill">
+                <mat-label> Contact</mat-label>
+                <input required maxlength="10" id="mname" value="dataTofill.mname" type="text" name="contact"
+                formControlName="contact" matInput>
+                <mat-error>
+                  contact is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 form-group">
+
+
+              <mat-form-field class="imp" appearance="fill">
+                <mat-label>UserType</mat-label>
+                <mat-select required formControlName="userType" selectValidate name="userType" >
+                  <mat-option *ngFor="let g of usert" [value]="g.Text">
+                    {{g.Text}}
+                  </mat-option>
+                </mat-select>
+                <mat-error >
+                  UserType is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+
+          
+          <div class="row">
+
+            <div class="col-md-4 form-group">
+
+              <mat-form-field class="example-full-width imp" appearance="fill">
+                <label for="dob">Date of Birth</label>
+                <input required type="date" name="dob" id="dob" aria-describedby="dob" placeholder="Enter dob"
+                formControlName="dob" matInput>
+                <mat-error >
+                  dob is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+
+
+
+
+
+
+            </div>
+
+
+            <div class="col-md-4 form-group">
+              <!-- <label for="gender">Gender</label> -->
+
+
+              <!-- <mat-form-field class="imp" appearance="fill"> -->
+                <div appearance="fill" style="background-color:whitesmoke ;">
+                <mat-label>Gender</mat-label>&nbsp;&nbsp;
+              <mat-radio-group formControlName="gender" required name="gender" aria-label="Select an option">
+                <mat-radio-button value="1"> Male</mat-radio-button>&nbsp;&nbsp;
+                <mat-radio-button value="2">Female</mat-radio-button>
+              </mat-radio-group>
+              <mat-error  >
+                Gender is <strong>required</strong>
+              </mat-error>
+                </div>
+              <!-- </mat-form-field> -->
+
+
+              <!-- <mat-form-field class="imp" appearance="fill">
+                <mat-label>Gender</mat-label>
+                <mat-select required formControlName="gender"  selectValidate name="gender" >
+                  <mat-option *ngFor="let g of genders" [value]="g.Text">
+                    {{g.Text}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="personForm.get('gender')!.errors!==null" >
+                  Gender is <strong>required</strong>
+                </mat-error>
+              </mat-form-field> -->
+            </div>
+            <div class="col-md-4 form-group">
+
+
+              <mat-form-field class="example-full-width imp" appearance="fill">
+                <mat-label>Age</mat-label>
+                <input required type="text" name="age" id="age"  selectAgeValidate
+                formControlName="age" matInput>
+                <mat-error >
+                  invalid <strong>age</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          
+          <div class="row">
+
+            <div class="col-md-4 form-group">
+              <!-- <label for="exampleInputName1">Country</label> -->
+
+              <mat-form-field class="imp" appearance="fill">
+                <mat-label>Select Country</mat-label>
+                <mat-select  required name="country" formControlName="country" >
+                  <mat-option *ngFor="let c of countryArray" (click)="detectCountryChange($event)" [value]="c.value">
+                    {{c.viewValue}}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  Country is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 form-group">
+              <!-- <label for="exampleInputPassword1">State</label> -->
+
+              <mat-form-field class="imp" appearance="fill">
+                <mat-label>Select state</mat-label>
+                <mat-select required name="state" formControlName="state" >
+                  <mat-option (click)="detectStateChange($event)"
+                    *ngFor="let state of (countryArray[countryIndex].states)" [value]="state.value">
+                    {{state.viewValue}}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  state is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4 form-group">
+              <!-- <label for="exampleInputEmail1">City</label> -->
+
+              <mat-form-field class="imp" appearance="fill">
+                <mat-label>City</mat-label>
+                <mat-select required name="city" formControlName="city" >
+                  <mat-option *ngFor="let city of  (countryArray[countryIndex].states[stateIndex].cities)"
+                    [value]="city.value">
+                    {{city.viewValue}}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  city is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          
+          <div class="row">
+
+            <div class="col-md-4 form-group">
+
+
+              <mat-form-field class="example-full-width imp" appearance="fill">
+                <mat-label>Pin</mat-label>
+                <input required id="pin" type="text" name="pin" selectPinValidate
+                  placeholder="Enter pin" formControlName="pin" maxlength="6"  matInput>
+                <mat-error >
+                  invalid <strong>pin</strong>
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <div class="col-md-4 form-group">
+              <mat-form-field class="example-full-width imp addressw" appearance="fill">
+                <label for="address1">Address1</label>
+                <textarea required type="textarea" name="address1"  id="address1"
+                  placeholder="address1" formControlName="address1" matInput></textarea>
+                  <mat-error >
+                    address1 is <strong>required</strong>
+                  </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-4 form-group">
+              <mat-form-field class="example-full-width imp addressw" appearance="fill">
+                <label for="address2">Address2</label>
+                <textarea required type="textarea" name="address2"  id="address2"
+                  placeholder="address2" formControlName="address2" matInput></textarea>
+                  <mat-error >
+                    address2 is <strong>required</strong>
+                  </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- kbnkdnkn -->
+
+
+          <div class="row">
+            
+            <div class="col-md-3">
+                <button type="submit" (click)="doProcess()" class="btn btn-success">Create</button>
+  
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </mat-card>
+  </div>
+</div>
+
+
+

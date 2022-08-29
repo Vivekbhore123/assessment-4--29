@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* 
+.addressw{
+    width:75% !important;
+} */
+
+.mat-form-field-appearance-fill{
+    width: 100%;
+}
+
+.mat-column-imageURL{
+    /* background-color: blue !important; */
+    width: 19%;
+}
+
+.imgmain{
+    border-radius: 20px;
+}
+
+.mycsstable{
+    height: 500px !important;
+}
+
+
+.imp{
+    height: 5px !important;
+}

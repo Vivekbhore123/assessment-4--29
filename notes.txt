@@ -1,0 +1,287 @@
+
+
+
+
+
+
+
+
+
+          
+           
+
+
+
+
+          </div>
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//mytest
+// difference between observable and promise;
+//observable returns data in the form of chunks while promises does not
+
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+
+<p>create works!</p>
+
+
+<form  [formGroup]="personForm" (ngSubmit)="submit()">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <h1 class="h1-top">Person</h1>
+        </div>
+        
+      </div>
+      
+      <div class="row">
+        <div class="col-md-1"></div>
+      <div class="col-md-3">
+        <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Full Name</mat-label>
+            <input matInput type="text" formControlName="name">
+           
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-form-field" appearance="fill">
+              <mat-label>Age</mat-label>
+              <input matInput type="text" formControlName="age" >
+             
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <!-- <mat-form-field class="example-form-field" appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" >
+               
+              </mat-form-field> -->
+            </div>
+            <div class="col-md-2"></div>
+      </div>
+      <div formGroupName="skills" class="row">
+        <div class="col-md-1"></div>
+      <div class="col-md-3">
+        <mat-form-field class="example-form-field" appearance="fill">
+            <mat-label>Skill</mat-label>
+            <input matInput type="text" formControlName="skillName">
+           
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-form-field" appearance="fill">
+              <mat-label>Experience</mat-label>
+              <input matInput type="text" formControlName="experience" >
+             
+            </mat-form-field>
+          </div>
+          <div class="col-md-3">
+            <!-- <mat-form-field class="example-form-field" appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" >
+               
+              </mat-form-field> -->
+            </div>
+            <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-1"></div>
+      <div class="col-md-1 ">
+        <button mat-raised-button class="btn btn-primary">Create</button>
+        </div>
+        <div class="col-md-1 ">
+            <button mat-raised-button (click)="loaddata()" class="btn btn-success">Load Data</button>
+            </div>
+      </div>
+    </form>
+    <table class="table" border="1">
+        <thead>
+            <th> Form Group</th>
+            <th>Form Control (Name) </th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                   Touched- left:  {{personForm.touched}}
+                   <br/> Dirty : {{personForm.dirty}}
+                   <br/> Valid : {{personForm.valid}}
+                   <br/> Value : {{personForm.value| json}}
+                </td>
+           
+                <td>
+                   Touched- right:  {{personForm.controls['name'].touched}}
+                   <br/> Dirty : {{personForm.controls['name'].dirty}}
+                   <br/> Valid : {{personForm.controls['name'].valid}}
+                   <br/> Value : {{personForm.controls['name'].value}}
+                </td>
+            </tr> 
+        </tbody>
+    </table>
+
+    <hr>
+    <hr>
+    <hr>
+
+
+    loginservviece
+    [[[[[
+
+      import { Injectable } from "@angular/core";
+import { EmailValidator } from "@angular/forms";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
+// import { Observable } from "rxjs";
+import { DashboardComponent } from "src/app/dashboard/dashboard.component";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
+
+import { Observable, ReplaySubject,catchError,throwError } from 'rxjs';
+
+
+
+
+import {PeriodicElement,UserType,EmpData} from "../models/users.model"
+
+@Injectable({
+  providedIn:"root"
+})
+export class LoginService implements CanActivate {
+
+  userM:string="";
+  passM:string="";
+  status:boolean = false;
+
+
+  private employees:EmpData[]=[
+    { code:1,fname:"tom",mname:"mdtom",lname:"ljsjd",gender:"male",userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"",age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24" },
+    { code:2,fname:"ram",mname:"dom",lname:"ajax",gender:"female",userType:UserType.Permenant,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24"  },
+    { code:2,fname:"ram",mname:"dom",lname:"ajax",gender:"female",userType:UserType.Permenant,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24"  },
+    { code:3,fname:"shyam",mname:"shell",lname:"jquery",gender:"female",userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24"  },
+    { code:4,fname:"seeta",mname:"toor",lname:"json",gender:"male",userType:UserType.Permenant,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24"  },
+    { code:5,fname:"geeta",mname:"moore",lname:"xml",gender:"female",userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi",btns:""  ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24" },
+    { code:6,fname:"dell",mname:"pqr",lname:"lambda",gender:"male",userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi" ,btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24" },
+    { code:7,fname:"bill",mname:"xyz",lname:"pixel",gender:"male",userType:UserType.Contractual,salary:2000,pin:334421,address1:"mumbai",address2:"delhi" ,btns:"" ,age:23,country:"India",state:"Maharashtra",city:"Mumbai",dob:"2022-08-24" },
+
+]
+
+getEmployees():EmpData[]{
+  return this.employees;
+}
+
+   private user:PeriodicElement[]=[
+          { username:"admin@gmail.com",password:"admin"},
+          { username:"one@gmail.com",password:"one"},
+          { username:"two@gmail.com",password:"two"},
+     ]
+     constructor(private router: Router)
+     {
+      
+     }
+
+    //  test
+    isLoggedIn:boolean=false;
+    setStatus()
+    {
+      this.isLoggedIn=true;
+    }
+    getStatus()
+    {
+      return this.isLoggedIn;
+    }
+    //  test
+    
+ 
+    
+
+   getUsers():PeriodicElement[]{
+     return this.user;
+   }
+   private isUserLogin:boolean=false;
+
+
+  
+  
+   setCredentials(userM:string,passM:string)
+   {
+    this.userM = userM;
+    this.passM = passM;
+    localStorage.setItem("userM",this.userM)
+    localStorage.setItem("passM",this.passM)
+   
+   }
+
+   authenticate()
+   {
+    let username = localStorage.getItem("userM")
+    let password = localStorage.getItem("passM")
+    
+
+    this.user.map(item=>{
+      if(username==item.username && password==item.password)
+      {
+        this.status = true;
+      }
+    })
+     
+    if(this.status)
+    {
+     return {
+      username:username,
+      status:this.status
+     }
+    }
+     else 
+     {
+      return {
+        username:null,
+        status:this.status
+       }
+     }
+   
+   }
+
+   findRowFromService(id:any)
+   {
+    let temp={}
+    this.employees.map(item=>{
+      if(item.code==id)
+      {
+        temp = item;
+      }
+      return item
+    })
+    return temp;
+    console.log("row printing")
+   }
+
+   
+
+  
+ 
+   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+
+    // this wil only check if there's a token
+    // this doesn't means that the token is valid!
+    // optionally you can also validate the token on the server
+    // each time this guard is invoked
+    // but that ofcourse could be a lot of calls
+    if (this.authenticate()) {
+      console.log("vivek")
+        return true;
+    }
+
+    // not logged in so redirect to login page with the return url
+    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+    return false;
+}
+  
+
+}
+    ]]]]]
